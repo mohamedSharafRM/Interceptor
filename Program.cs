@@ -10,7 +10,7 @@ var product1 = new Product
     Description = "Gaming Laptop",
     Price = 19500m
 };
-/*
+
 dbContext.Products.Add(product1);
 dbContext.SaveChanges();
 
@@ -22,5 +22,9 @@ Console.WriteLine($"Product Price: {product1.Price.ToString("N0")}");
 Console.WriteLine($"Product Created At: {product1.CreatedAt}");
 Console.WriteLine($"Product Updated At: {product1.UpdatedAt}");
 Console.WriteLine($"Product IsDeleted: {product1.IsDeleted}");
-*/
 
+product1.Price = 25000m;
+dbContext.SaveChanges();
+Console.WriteLine("Product updated successfully.");
+Console.WriteLine($"Product Price: {product1.Price.ToString("N0")}");
+Console.WriteLine($"Product updated at : {product1.UpdatedAt}");
