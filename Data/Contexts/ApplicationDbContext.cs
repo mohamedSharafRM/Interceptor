@@ -1,4 +1,5 @@
-﻿using Interceptor.Models;
+﻿using Interceptor.Data.Interceptors;
+using Interceptor.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Interceptor.Data.Contexts;
@@ -9,7 +10,8 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=localhost\\MSSQLSERVER01; Database=InterceptorDb; Trusted_Connection=True; TrustServerCertificate=True");
+        optionsBuilder.UseSqlServer("Server=localhost\\MSSQLSERVER01; Database=InterceptorDb; Trusted_Connection=True; TrustServerCertificate=True")
+            .AddInterceptors(new AuditInterceptor());
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
