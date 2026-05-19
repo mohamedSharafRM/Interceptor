@@ -19,5 +19,8 @@ internal class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.HasIndex(p => p.Name)
             .IsUnique();
+
+        /*add a query filter to get all the active products(Not Deleted)*/
+        builder.HasQueryFilter(p => !p.IsDeleted);
     }
 }
