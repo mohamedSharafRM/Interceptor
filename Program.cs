@@ -4,14 +4,22 @@ using Interceptor.Models;
 
 using var dbContext = new ApplicationDbContext();
 
-var firstProduct = dbContext.Products.FirstOrDefault();
+List<Product> newProducts =
+    [
+        new Product { Name = "Product 1", Description = "Description 1", Price = 10.00m },
+        new Product { Name = "Product 2", Description = "Description 2", Price = 20.00m },
+        new Product { Name = "Product 3", Description = "Description 3", Price = 30.00m }
+    ];
 
-if (firstProduct == null)
-    return;
 
-dbContext.Products.Remove(firstProduct);
+dbContext.Products.AddRange(newProducts);
 dbContext.SaveChanges();
 
-
-Console.WriteLine("Product Deleted");
-Console.WriteLine($"IsDeleted: {firstProduct.IsDeleted}");
+var products = dbContext.Products.ToList();
+foreach (var product in products)
+{
+    Console.WriteLine($"Name: {product.Name}");
+    Console.WriteLine($"Description: {product.Description}");
+    Console.WriteLine($"Price: {product.Price}");
+    Console.WriteLine($"IsDeleted: {product.IsDeleted}");
+}
